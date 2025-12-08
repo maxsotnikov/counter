@@ -1,0 +1,47 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/*-----------Styles for counter----------*/
+.counter-container {
+  border: 3px solid #3ccbe3;
+  border-radius: 10px;
+  padding: 20px;
+  color: #282837;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.buttons-container {
+  display: flex;
+  gap: 30px;
+  border: inherit;
+  border-radius: inherit;
+  padding: inherit;
+}
+
+.display {
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  border-radius: inherit;
+  background-color: #3ccbe3;
+}
+
+.display.max-count {
+  color: red;
+}
+
+.button-active {
+  background-color:#3ccbe3;
+  color: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+.button-active.button-disabled {
+  opacity: 0.3;
+}
