@@ -1,3 +1,5 @@
+import './Button.css'
+
 type ButtonPropsType = {
   title: string,
   onClick: () => void,
@@ -9,7 +11,7 @@ export const Button = ({title, onClick, disabled}: ButtonPropsType) => {
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`button-active ${disabled ? 'button-disabled' : ''}`}
+      className={`button ${disabled ? 'button:disabled' : ''}`}
     >
       {title}
     </button>

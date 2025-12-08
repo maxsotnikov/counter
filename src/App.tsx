@@ -1,9 +1,14 @@
 import './App.css'
-import {Counter} from "./Counter.tsx";
+import {Counter} from "./components/Counter/Counter.tsx";
+// import {SetCounter} from "./components/SetCounter/SetCounter.tsx";
 
 function App() {
   return (
-    <Counter />
+    <>
+      {/*<SetCounter/>*/}
+      <Counter />
+    </>
+
   )
 }
 

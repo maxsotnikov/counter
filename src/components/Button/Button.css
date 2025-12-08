@@ -1,0 +1,19 @@
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  border: inherit;
+  border-radius: inherit;
+  padding: 20px 0;
+}
+
+.button {
+  background-color:#3ccbe3;
+  color: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+.button:disabled {
+  opacity: 0.3;
+}
