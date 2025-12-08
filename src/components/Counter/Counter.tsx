@@ -6,15 +6,10 @@ import {
 } from "../Display/Display.tsx";
 import {ButtonsContainer} from "../Button/ButtonsContainer.tsx";
 
-type CounterPropsType = {
-  maxCount: number
-  minCount: number
-}
+export const Counter = () => {
 
-export const Counter = ({maxCount, minCount}: CounterPropsType) => {
-
-  const [minValue, setMinValue] = useState<number>(minCount || 0)
-  const [maxValue, setMaxValue] = useState<number>(maxCount || 5)
+  const [minValue, setMinValue] = useState<number>(0)
+  const [maxValue, setMaxValue] = useState<number>(5)
   const [count, setCount] = useState<number>(minValue)
   const [displayMode, setDisplayMode] = useState<DisplayModePropsType>('counter')
 
@@ -26,7 +21,7 @@ export const Counter = ({maxCount, minCount}: CounterPropsType) => {
     setCount(0)
   }
   const settingCount = () => {
-    if(displayMode === 'counter') {
+    if (displayMode === 'counter') {
       setDisplayMode('settings')
     } else {
       setCount(minValue)
