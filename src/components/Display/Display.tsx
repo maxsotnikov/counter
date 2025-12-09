@@ -4,6 +4,8 @@ export type DisplayPropsType = {
   count: number
   maxCount: number
   minCount: number
+  maxError: boolean
+  minError: boolean
   mode: DisplayModePropsType
   onMaxChange: (value: number) => void
   onMinChange: (value: number) => void
@@ -15,6 +17,8 @@ export const Display = ({
                           count,
                           maxCount,
                           minCount,
+                          maxError,
+                          minError,
                           mode,
                           onMinChange,
                           onMaxChange,
@@ -30,12 +34,13 @@ export const Display = ({
             type={'number'}
             value={maxCount}
             onChange={(e) => onMaxChange(Number(e.currentTarget.value))}
-
+            className={maxError ? 'error' : ''}
           /></label>
           <label>min value: <input
             type={'number'}
             value={minCount}
             onChange={(e) => onMinChange(Number(e.currentTarget.value))}
+            className={minError ? 'error' : ''}
           /></label>
         </div>)}
     </>

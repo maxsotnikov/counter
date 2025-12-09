@@ -12,13 +12,15 @@ export const Counter = () => {
   const [maxValue, setMaxValue] = useState<number>(5)
   const [count, setCount] = useState<number>(minValue)
   const [displayMode, setDisplayMode] = useState<DisplayModePropsType>('counter')
+  const [minError, setMinError] = useState(false)
+  const [maxError, setMaxError] = useState(false)
 
   const addCount = () => {
     const newCount = count + 1
     setCount(newCount)
   }
   const resetCount = () => {
-    setCount(0)
+    setCount(minValue)
   }
   const settingCount = () => {
     if (displayMode === 'counter') {
@@ -30,9 +32,16 @@ export const Counter = () => {
   }
   const saveMaxCount = (newMaxValue: number) => {
     setMaxValue(newMaxValue)
+    validateCount(minValue, newMaxValue)
   }
   const saveMinCount = (newMinValue: number) => {
     setMinValue(newMinValue)
+    validateCount(newMinValue, maxValue)
+  }
+
+  const validateCount = (min: number, max: number) => {
+    setMinError(min < 0 || min >= max)
+    setMaxError(max < 0 || max <= min)
   }
 
   return (
@@ -41,6 +50,8 @@ export const Counter = () => {
         count={count}
         maxCount={maxValue}
         minCount={minValue}
+        maxError={maxError}
+        minError={minError}
         mode={displayMode}
         onMaxChange={saveMaxCount}
         onMinChange={saveMinCount}

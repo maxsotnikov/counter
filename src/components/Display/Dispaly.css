@@ -32,4 +32,8 @@
     font-size: 16px;
     text-align: center;
   }
+
+  input.error {
+    background-color: #ef5151;
+  }
 }

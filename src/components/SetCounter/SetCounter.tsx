@@ -1,11 +1,11 @@
-import {Display} from "../Display/Display.tsx";
+// import {Display} from "../Display/Display.tsx";
 import '../Button/Button.css'
 import {Button} from "../Button/Button.tsx";
 
 export const SetCounter = () => {
   return (
     <div className="counter-container">
-      <Display/>
+      {/*<Display/>*/}
       <div className="buttons-container">
         <Button title={'set'} onClick={() => {}} disabled={true}/>
       </div>
