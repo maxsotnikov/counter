@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import './Counter.css'
 import {
   Display,
@@ -14,6 +14,29 @@ export const Counter = () => {
   const [displayMode, setDisplayMode] = useState<DisplayModePropsType>('counter')
   const [minError, setMinError] = useState(false)
   const [maxError, setMaxError] = useState(false)
+
+  useEffect(() => {
+    const savedData = localStorage.getItem("counterValue");
+    if(savedData) {
+      const parsed = JSON.parse(savedData)
+      if(typeof parsed === 'object') {
+        setCount(parsed.count ?? 0) // проверка на undefined || null, а если поставить || вместо ?? то при count = 0 будет false
+        setMinValue(parsed.minValue ?? 0)
+        setMaxValue(parsed.maxValue ?? 5)
+
+        validateCount(parsed.minValue ?? 0, parsed.maxValue ?? 0)
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const data = {
+      count,
+      minValue,
+      maxValue,
+    }
+    localStorage.setItem('counterValue', JSON.stringify(data))
+  }, [count, minValue, maxValue])
 
   const addCount = () => {
     const newCount = count + 1
