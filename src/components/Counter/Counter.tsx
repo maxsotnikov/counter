@@ -15,29 +15,10 @@ export const Counter = () => {
   const [minError, setMinError] = useState(false)
   const [maxError, setMaxError] = useState(false)
 
-  useEffect(() => {
-    const savedData = localStorage.getItem("counterValue");
-    if(savedData) {
-      const parsed = JSON.parse(savedData)
-      if(typeof parsed === 'object') {
-        setCount(parsed.count ?? 0) // проверка на undefined || null, а если поставить || вместо ?? то при count = 0 будет false
-        setMinValue(parsed.minValue ?? 0)
-        setMaxValue(parsed.maxValue ?? 5)
-
-        validateCount(parsed.minValue ?? 0, parsed.maxValue ?? 0)
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    const data = {
-      count,
-      minValue,
-      maxValue,
-    }
-    localStorage.setItem('counterValue', JSON.stringify(data))
-  }, [count, minValue, maxValue])
-
+  const validateCount = (min: number, max: number) => {
+    setMinError(min < 0 || min >= max)
+    setMaxError(max < 0 || max <= min)
+  }
   const addCount = () => {
     const newCount = count + 1
     setCount(newCount)
@@ -54,18 +35,39 @@ export const Counter = () => {
     }
   }
   const saveMaxCount = (newMaxValue: number) => {
-    setMaxValue(newMaxValue)
+    if(minValue !== maxValue || newMaxValue > minValue) {
+      setMaxValue(newMaxValue)
+    }
     validateCount(minValue, newMaxValue)
   }
   const saveMinCount = (newMinValue: number) => {
-    setMinValue(newMinValue)
+    if(minValue !== maxValue || newMinValue < maxValue) {
+      setMinValue(newMinValue)
+    }
     validateCount(newMinValue, maxValue)
   }
 
-  const validateCount = (min: number, max: number) => {
-    setMinError(min < 0 || min >= max)
-    setMaxError(max < 0 || max <= min)
-  }
+  useEffect(() => {
+    const savedData = localStorage.getItem("counterValue");
+    if(savedData) {
+      const parsed = JSON.parse(savedData)
+      if(typeof parsed === 'object') {
+        setCount(parsed.count ?? 0) // проверка на undefined || null, а если поставить || вместо ?? то при count = 0 будет false
+        setMinValue(parsed.minValue ?? 0)
+        setMaxValue(parsed.maxValue ?? 5)
+
+        validateCount(parsed.minValue ?? 0, parsed.maxValue ?? 0)
+      }
+    }
+  }, []);
+  useEffect(() => {
+    const data = {
+      count,
+      minValue,
+      maxValue,
+    }
+    localStorage.setItem('counterValue', JSON.stringify(data))
+  }, [count, minValue, maxValue])
 
   return (
     <div className={'counter-container'}>

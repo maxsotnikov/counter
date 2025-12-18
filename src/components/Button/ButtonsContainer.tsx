@@ -35,13 +35,20 @@ export const ButtonsContainer = ({
             onClick={resetCount}
             disabled={count === minCount}
           />
+          <Button
+            title={'set'}
+            onClick={settingCount}
+            disabled={false}
+          />
         </>
       )}
-      <Button
-        title={'set'}
-        onClick={settingCount}
-        disabled={false}
-      />
+      {mode === 'settings' && (
+        <Button
+          title={'set'}
+          onClick={settingCount}
+          disabled={minCount >= maxCount || minCount < 0 || maxCount < 0}
+        />
+      )}
     </div>
   );
 };

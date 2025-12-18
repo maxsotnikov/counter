@@ -12,5 +12,3 @@ export const SetCounter = () => {
     </div>
   );
 };
-
-export default SetCounter;

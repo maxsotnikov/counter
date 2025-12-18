@@ -1,4 +1,5 @@
 import './Dispaly.css'
+import type {ChangeEvent} from 'react';
 
 export type DisplayPropsType = {
   count: number
@@ -26,6 +27,14 @@ export const Display = ({
 
   const counter = count === maxCount ? 'display max-count' : 'display'
   const display = mode === 'counter' ? counter : 'display settings'
+
+  const onMinChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    onMinChange(Number(e.currentTarget.value))
+  }
+  const onMaxChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    onMaxChange(Number(e.currentTarget.value))
+  }
+
   return (
     <>
       {mode === 'counter' ? <div className={display}>{count}</div> : (
@@ -33,13 +42,13 @@ export const Display = ({
           <label>max value: <input
             type={'number'}
             value={maxCount}
-            onChange={(e) => onMaxChange(Number(e.currentTarget.value))}
+            onChange={onMaxChangeHandler}
             className={maxError ? 'error' : ''}
           /></label>
           <label>min value: <input
             type={'number'}
             value={minCount}
-            onChange={(e) => onMinChange(Number(e.currentTarget.value))}
+            onChange={onMinChangeHandler}
             className={minError ? 'error' : ''}
           /></label>
         </div>)}
