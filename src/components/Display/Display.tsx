@@ -29,10 +29,11 @@ export const Display = ({
   const display = mode === 'counter' ? counter : 'display settings'
 
   const onMinChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    onMinChange(Number(e.currentTarget.value))
+    if (onMinChange) onMinChange(Number(e.currentTarget.value))
+
   }
   const onMaxChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    onMaxChange(Number(e.currentTarget.value))
+    if (onMaxChange) onMaxChange(Number(e.currentTarget.value))
   }
 
   return (
