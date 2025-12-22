@@ -1,11 +1,13 @@
 import './App.css'
-import {Counter} from "./components/Counter/Counter.tsx";
+import {UniversalCounter} from "./components/UniversalCounter/UniversalCounter.tsx";
+import {SimpleCounter} from './components/SimpleCounter/SimpleCounter.tsx';
 
 function App() {
   return (
-    <>
-      <Counter />
-    </>
+    <div className={'container'}>
+      <UniversalCounter />
+      <SimpleCounter />
+    </div>
   )
 }
 

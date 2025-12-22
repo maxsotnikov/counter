@@ -1,5 +1,5 @@
-import {Button} from "./Button.tsx";
-import './Button.css'
+import {Button} from "../Button/Button.tsx";
+import '../Button/Button.css'
 import type {DisplayModePropsType} from "../Display/Display.tsx";
 
 type ButtonsContainerPropsType = {

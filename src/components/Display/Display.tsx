@@ -3,21 +3,21 @@ import type {ChangeEvent} from 'react';
 
 export type DisplayPropsType = {
   count: number
-  maxCount: number
-  minCount: number
-  maxError: boolean
-  minError: boolean
-  mode: DisplayModePropsType
-  onMaxChange: (value: number) => void
-  onMinChange: (value: number) => void
+  maxValue: number
+  minValue: number
+  maxError?: boolean
+  minError?: boolean
+  mode?: DisplayModePropsType
+  onMaxChange?: (value: number) => void
+  onMinChange?: (value: number) => void
 }
 
 export type DisplayModePropsType = 'settings' | 'counter'
 
 export const Display = ({
                           count,
-                          maxCount,
-                          minCount,
+                          maxValue,
+                          minValue,
                           maxError,
                           minError,
                           mode,
@@ -25,7 +25,7 @@ export const Display = ({
                           onMaxChange,
                         }: DisplayPropsType) => {
 
-  const counter = count === maxCount ? 'display max-count' : 'display'
+  const counter = count === maxValue ? 'display max-count' : 'display'
   const display = mode === 'counter' ? counter : 'display settings'
 
   const onMinChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,13 +41,13 @@ export const Display = ({
         <div className={'display settings'}>
           <label>max value: <input
             type={'number'}
-            value={maxCount}
+            value={maxValue}
             onChange={onMaxChangeHandler}
             className={maxError ? 'error' : ''}
           /></label>
           <label>min value: <input
             type={'number'}
-            value={minCount}
+            value={minValue}
             onChange={onMinChangeHandler}
             className={minError ? 'error' : ''}
           /></label>

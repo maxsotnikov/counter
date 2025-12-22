@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
-import './Counter.css'
+import s from '../Counter.module.css'
 import {
   Display,
   type DisplayModePropsType,
 } from "../Display/Display.tsx";
-import {ButtonsContainer} from "../Button/ButtonsContainer.tsx";
+import {ButtonsContainer} from "../ButtonsContainer/ButtonsContainer.tsx";
 
-export const Counter = () => {
+export const UniversalCounter = () => {
 
   const [minValue, setMinValue] = useState<number>(0)
   const [maxValue, setMaxValue] = useState<number>(5)
@@ -48,7 +48,7 @@ export const Counter = () => {
   }
 
   useEffect(() => {
-    const savedData = localStorage.getItem("counterValue");
+    const savedData = localStorage.getItem("universalCounter");
     if(savedData) {
       const parsed = JSON.parse(savedData)
       if(typeof parsed === 'object') {
@@ -66,15 +66,15 @@ export const Counter = () => {
       minValue,
       maxValue,
     }
-    localStorage.setItem('counterValue', JSON.stringify(data))
+    localStorage.setItem('universalCounter', JSON.stringify(data))
   }, [count, minValue, maxValue])
 
   return (
-    <div className={'counter-container'}>
+    <div className={s.counterContainer}>
       <Display
         count={count}
-        maxCount={maxValue}
-        minCount={minValue}
+        maxValue={maxValue}
+        minValue={minValue}
         maxError={maxError}
         minError={minError}
         mode={displayMode}
