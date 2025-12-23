@@ -1,8 +1,8 @@
 import {Display, type DisplayModePropsType} from '../../Display/Display.tsx';
 import '../../Button/Button.css'
 import {type ButtonPropsType} from '../../Button/Button.tsx';
-import s from '../../Counter.module.css';
-import {ButtonsContainer2} from '../../ButtonsContainer2/ButtonsContainer2.tsx';
+import s from '../SimpleCounter.module.css';
+import {ButtonsContainer} from '../../ButtonsContainer/ButtonsContainer.tsx';
 
 type SetCounter = {
   minValue: number
@@ -48,7 +48,7 @@ export const SetCounter = ({
         onMaxChange={onMaxChange}
         onMinChange={onMinChange}
       />
-      <ButtonsContainer2 buttons={settingsButtons} />
+      <ButtonsContainer buttons={settingsButtons} />
     </div>
   );
 };

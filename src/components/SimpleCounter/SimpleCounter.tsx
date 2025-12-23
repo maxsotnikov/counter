@@ -1,6 +1,6 @@
 import s from './SimpleCounter.module.css'
 import {SetCounter} from './SetCounter/SetCounter.tsx';
-import {Counter} from '../Counter.tsx';
+import {Counter} from './Counter/Counter.tsx';
 import {useEffect, useState} from 'react';
 import type {DisplayModePropsType} from '../Display/Display.tsx';
 
@@ -9,7 +9,6 @@ export const SimpleCounter = () => {
   const [minValue, setMinValue] = useState<number>(0)
   const [maxValue, setMaxValue] = useState<number>(5)
   const [count, setCount] = useState<number>(minValue)
-  // const [displayMode, setDisplayMode] = useState<DisplayModePropsType>('counter')
   const [minError, setMinError] = useState(false)
   const [maxError, setMaxError] = useState(false)
 

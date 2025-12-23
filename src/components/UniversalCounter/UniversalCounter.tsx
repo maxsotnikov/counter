@@ -1,10 +1,11 @@
-import {useEffect, useState} from "react";
-import s from '../Counter.module.css'
+import {useEffect, useState} from 'react';
+import s from './UniversalCounter.module.css'
 import {
   Display,
   type DisplayModePropsType,
-} from "../Display/Display.tsx";
-import {ButtonsContainer} from "../ButtonsContainer/ButtonsContainer.tsx";
+} from '../Display/Display.tsx';
+import {ButtonsContainer} from '../ButtonsContainer/ButtonsContainer.tsx';
+import type {ButtonPropsType} from '../Button/Button.tsx';
 
 export const UniversalCounter = () => {
 
@@ -35,23 +36,49 @@ export const UniversalCounter = () => {
     }
   }
   const saveMaxCount = (newMaxValue: number) => {
-    if(minValue !== maxValue || newMaxValue > minValue) {
+    if (minValue !== maxValue || newMaxValue > minValue) {
       setMaxValue(newMaxValue)
     }
     validateCount(minValue, newMaxValue)
   }
   const saveMinCount = (newMinValue: number) => {
-    if(minValue !== maxValue || newMinValue < maxValue) {
+    if (minValue !== maxValue || newMinValue < maxValue) {
       setMinValue(newMinValue)
     }
     validateCount(newMinValue, maxValue)
   }
 
+  const counterButtons: ButtonPropsType[] = [
+    {
+      title: 'inc',
+      onClick: addCount,
+      disabled: count >= maxValue,
+    },
+    {
+      title: 'reset',
+      onClick: resetCount,
+      disabled: count === minValue,
+    },
+    {
+      title: 'set',
+      onClick: settingCount,
+      disabled: false,
+    }
+  ]
+
+  const settingsButtons: ButtonPropsType[] = [
+    {
+      title: 'set',
+      onClick: settingCount,
+      disabled: minValue >= maxValue || minValue < 0 || maxValue < 0,
+    }
+  ]
+
   useEffect(() => {
-    const savedData = localStorage.getItem("universalCounter");
-    if(savedData) {
+    const savedData = localStorage.getItem('universalCounter');
+    if (savedData) {
       const parsed = JSON.parse(savedData)
-      if(typeof parsed === 'object') {
+      if (typeof parsed === 'object') {
         setCount(parsed.count ?? 0) // проверка на undefined || null, а если поставить || вместо ?? то при count = 0 будет false
         setMinValue(parsed.minValue ?? 0)
         setMaxValue(parsed.maxValue ?? 5)
@@ -70,7 +97,7 @@ export const UniversalCounter = () => {
   }, [count, minValue, maxValue])
 
   return (
-    <div className={s.counterContainer}>
+    <div className={s.universalCounterContainer}>
       <Display
         count={count}
         maxValue={maxValue}
@@ -81,15 +108,7 @@ export const UniversalCounter = () => {
         onMaxChange={saveMaxCount}
         onMinChange={saveMinCount}
       ></Display>
-      <ButtonsContainer
-        count={count}
-        minCount={minValue}
-        maxCount={maxValue}
-        addCount={addCount}
-        resetCount={resetCount}
-        settingCount={settingCount}
-        mode={displayMode}
-      />
+      <ButtonsContainer buttons={displayMode === 'counter' ? counterButtons : settingsButtons} />
     </div>
   );
 };
