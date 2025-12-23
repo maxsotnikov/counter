@@ -14,6 +14,7 @@ type SetCounter = {
   minError: boolean
   onMaxChange: (value: number) => void
   onMinChange: (value: number) => void
+  isSetDisabled: boolean
 }
 
 export const SetCounter = ({
@@ -25,14 +26,15 @@ export const SetCounter = ({
                              maxError,
                              minError,
                              onMaxChange,
-                             onMinChange
+                             onMinChange,
+                             isSetDisabled
                            }: SetCounter) => {
 
   const settingsButtons: ButtonPropsType[] = [
     {
       title: 'set',
       onClick: settingCount,
-      disabled: minValue >= maxValue || minValue < 0 || maxValue < 0,
+      disabled: isSetDisabled || minValue >= maxValue || minValue < 0 || maxValue < 0,
     }
   ]
 

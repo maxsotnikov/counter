@@ -11,6 +11,7 @@ export const SimpleCounter = () => {
   const [count, setCount] = useState<number>(minValue)
   const [minError, setMinError] = useState(false)
   const [maxError, setMaxError] = useState(false)
+  const [isSetDisabled, setIsSetDisabled] = useState(false)
 
   const displayMode: DisplayModePropsType = 'settings'
 
@@ -23,12 +24,14 @@ export const SimpleCounter = () => {
     if (minValue !== maxValue || newMaxValue > minValue) {
       setMaxValue(newMaxValue)
     }
+    setIsSetDisabled(false)
     validateCount(minValue, newMaxValue)
   }
   const saveMinCount = (newMinValue: number) => {
     if (minValue !== maxValue || newMinValue < maxValue) {
       setMinValue(newMinValue)
     }
+    setIsSetDisabled(false)
     validateCount(newMinValue, maxValue)
   }
 
@@ -41,6 +44,7 @@ export const SimpleCounter = () => {
   }
   const settingCount = () => {
     setCount(minValue)
+    setIsSetDisabled(true)
   }
 
   useEffect(() => {
@@ -77,6 +81,7 @@ export const SimpleCounter = () => {
         minError={minError}
         onMaxChange={saveMaxCount}
         onMinChange={saveMinCount}
+        isSetDisabled={isSetDisabled}
       />
       <Counter
         minValue={minValue}
