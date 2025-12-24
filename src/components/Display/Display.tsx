@@ -7,12 +7,12 @@ export type DisplayPropsType = {
   minValue: number
   maxError?: boolean
   minError?: boolean
-  mode?: DisplayModePropsType
+  mode: DisplayModePropsType
   onMaxChange?: (value: number) => void
   onMinChange?: (value: number) => void
 }
 
-export type DisplayModePropsType = 'settings' | 'counter'
+export type DisplayModePropsType = 'settings' | 'counter' | 'error' | 'message'
 
 export const Display = ({
                           count,
@@ -20,13 +20,10 @@ export const Display = ({
                           minValue,
                           maxError,
                           minError,
-                          mode,
+                          mode = 'counter',
                           onMinChange,
                           onMaxChange,
                         }: DisplayPropsType) => {
-
-  const counter = count === maxValue ? 'display max-count' : 'display'
-  const display = mode === 'counter' ? counter : 'display settings'
 
   const onMinChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (onMinChange) onMinChange(Number(e.currentTarget.value))
@@ -36,23 +33,38 @@ export const Display = ({
     if (onMaxChange) onMaxChange(Number(e.currentTarget.value))
   }
 
+  if (mode === 'error') {
+    return <div className={'display'}><span className={'error-text'}>incorrect value</span>
+    </div>
+  }
+
+  if (mode === 'message') {
+    return <div className={'display'}><span className={'message-text'}>enter values and press 'set'</span>
+    </div>
+  }
+
+  if (mode === 'counter') {
+    const counter = count === maxValue ? 'display max-count' : 'display'
+    return <div className={counter}>{count}</div>
+  }
+
   return (
     <>
-      {mode === 'counter' ? <div className={display}>{count}</div> : (
-        <div className={'display settings'}>
-          <label>max value: <input
-            type={'number'}
-            value={maxValue}
-            onChange={onMaxChangeHandler}
-            className={maxError ? 'error' : ''}
-          /></label>
-          <label>min value: <input
-            type={'number'}
-            value={minValue}
-            onChange={onMinChangeHandler}
-            className={minError ? 'error' : ''}
-          /></label>
-        </div>)}
+      <div className={'display settings'}>
+        <label>max value: <input
+          type={'number'}
+          value={maxValue}
+          onChange={onMaxChangeHandler}
+          className={maxError ? 'error' : ''}
+        /></label>
+        <label>min value: <input
+          type={'number'}
+          value={minValue}
+          onChange={onMinChangeHandler}
+          className={minError ? 'error' : ''}
+        /></label>
+      </div>
     </>
+
   );
 };

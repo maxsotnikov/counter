@@ -1,5 +1,6 @@
 .display {
   padding: 20px;
+  height: 100%;
   margin-bottom: 20px;
   text-align: center;
   border: inherit;
@@ -37,4 +38,15 @@
   input.error {
     background-color: #ef5151;
   }
+}
+
+.error-text {
+  font-size: 30px;
+  text-align: center;
+  color: red;
+}
+
+.message-text {
+  font-size: 30px;
+  text-align: center;
 }

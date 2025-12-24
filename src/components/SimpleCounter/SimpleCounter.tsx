@@ -47,6 +47,14 @@ export const SimpleCounter = () => {
     setIsSetDisabled(true)
   }
 
+  const counterMode: DisplayModePropsType =
+    minError || maxError
+      ? 'error'
+      : !isSetDisabled
+        ? 'message'
+        : 'counter'
+
+
   useEffect(() => {
     const savedData = localStorage.getItem('simpleCounter');
     if (savedData) {
@@ -89,6 +97,7 @@ export const SimpleCounter = () => {
         count={count}
         addCount={addCount}
         resetCount={resetCount}
+        mode={counterMode}
       />
     </div>
   );

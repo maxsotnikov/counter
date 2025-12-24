@@ -9,6 +9,7 @@ type Counter = {
   count: number
   addCount: () => void,
   resetCount: () => void,
+  mode: DisplayModePropsType
 }
 
 export const Counter = ({
@@ -17,15 +18,16 @@ export const Counter = ({
                           count,
                           addCount,
                           resetCount,
+                          mode,
                         }: Counter) => {
 
-  const displayMode: DisplayModePropsType = 'counter'
+  // const displayMode: DisplayModePropsType = 'counter'
 
   const counterButtons: ButtonPropsType[] = [
     {
       title: 'inc',
       onClick: addCount,
-      disabled: count >= maxValue,
+      disabled: count >= maxValue || mode === 'message',
     },
     {
       title: 'reset',
@@ -35,14 +37,14 @@ export const Counter = ({
   ]
 
   return (
-      <div className={s.counterContainer}>
-        <Display
-          count={count}
-          maxValue={maxValue}
-          minValue={minValue}
-          mode={displayMode}
-        />
-        <ButtonsContainer buttons={counterButtons} />
-      </div>
+    <div className={s.counterContainer}>
+      <Display
+        count={count}
+        maxValue={maxValue}
+        minValue={minValue}
+        mode={mode}
+      />
+      <ButtonsContainer buttons={counterButtons} />
+    </div>
   );
 };
