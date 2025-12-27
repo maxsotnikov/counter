@@ -21,18 +21,16 @@ export const Counter = ({
                           mode,
                         }: Counter) => {
 
-  // const displayMode: DisplayModePropsType = 'counter'
-
   const counterButtons: ButtonPropsType[] = [
     {
       title: 'inc',
       onClick: addCount,
-      disabled: count >= maxValue || mode === 'message',
+      disabled: count >= maxValue || mode === 'message' || mode === 'error',
     },
     {
       title: 'reset',
       onClick: resetCount,
-      disabled: count === minValue,
+      disabled: count === minValue || mode === 'message' || mode === 'error',
     },
   ]
 

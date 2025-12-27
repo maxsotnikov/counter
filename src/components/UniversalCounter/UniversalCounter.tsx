@@ -78,12 +78,12 @@ export const UniversalCounter = () => {
     const savedData = localStorage.getItem('universalCounter');
     if (savedData) {
       const parsed = JSON.parse(savedData)
-      if (typeof parsed === 'object') {
+      if (parsed) {
         setCount(parsed.count ?? 0) // проверка на undefined || null, а если поставить || вместо ?? то при count = 0 будет false
         setMinValue(parsed.minValue ?? 0)
         setMaxValue(parsed.maxValue ?? 5)
 
-        validateCount(parsed.minValue ?? 0, parsed.maxValue ?? 0)
+        validateCount(parsed.minValue ?? 0, parsed.maxValue ?? 0) //убрать валидацию
       }
     }
   }, []);
