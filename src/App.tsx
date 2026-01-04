@@ -6,6 +6,7 @@ function App() {
   return (
     <div className={'container'}>
       <UniversalCounter />
+      {/*<SimpleCounter />*/}
       <SimpleCounter />
     </div>
   )

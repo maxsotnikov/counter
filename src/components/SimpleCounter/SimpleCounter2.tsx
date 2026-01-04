@@ -1,10 +1,10 @@
 import s from './SimpleCounter.module.css'
 import {SetCounter} from './SetCounter/SetCounter.tsx';
 import {Counter} from './Counter/Counter.tsx';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import type {DisplayModePropsType} from '../Display/Display.tsx';
 
-export const SimpleCounter = () => {
+export const SimpleCounter2 = () => {
 
   const MIN_INITIAL_VALUE = 0;
   const MAX_INITIAL_VALUE = 5;
@@ -21,8 +21,6 @@ export const SimpleCounter = () => {
 
   const [minValue, setMinValue] = useState<number>(getData('minValue', MIN_INITIAL_VALUE))
   const [maxValue, setMaxValue] = useState<number>(getData('maxValue', MAX_INITIAL_VALUE))
-  // const [minInput, setMinInput] = useState(minValue)
-  // const [maxInput, setMaxInput] = useState(maxValue)
   const [count, setCount] = useState<number>(minValue)
   const [minError, setMinError] = useState(false)
   const [maxError, setMaxError] = useState(false)
@@ -35,8 +33,7 @@ export const SimpleCounter = () => {
     setMaxError(max < 0 || max <= min)
   }
 
-  const saveMaxCount = (value: number) => {
-    const newMaxValue = normalizeValue(value)
+  const saveMaxCount = (newMaxValue: number) => {
     if ( newMaxValue >= minValue || newMaxValue <= minValue ) {
       setMaxValue(newMaxValue)
     }
@@ -66,10 +63,6 @@ export const SimpleCounter = () => {
 
   }
 
-  const normalizeValue = (value: number) => {
-    return Math.round(value)
-  }
-
   const counterMode: DisplayModePropsType =
     minError || maxError
       ? 'error'
@@ -78,27 +71,27 @@ export const SimpleCounter = () => {
         : 'counter'
 
 
-  // useEffect(() => {
-  //   const savedData = localStorage.getItem('simpleCounter');
-  //   if (savedData) {
-  //     const parsed = JSON.parse(savedData)
-  //     if (typeof parsed === 'object') {
-  //       // setCount(parsed.count ?? 0) // проверка на undefined || null, а если поставить || вместо ?? то при count = 0 будет false
-  //       // setMinValue(parsed.minValue ?? 0)
-  //       setMaxValue(parsed.maxValue ?? 5)
-  //
-  //       validateCount(parsed.minValue ?? 0, parsed.maxValue ?? 0)
-  //     }
-  //   }
-  // }, []);
-  // useEffect(() => {
-  //   const data = {
-  //     count,
-  //     minValue,
-  //     maxValue,
-  //   }
-  //   localStorage.setItem('simpleCounter', JSON.stringify(data))
-  // }, [count, minValue, maxValue])
+  useEffect(() => {
+    const savedData = localStorage.getItem('simpleCounter');
+    if (savedData) {
+      const parsed = JSON.parse(savedData)
+      if (typeof parsed === 'object') {
+        setCount(parsed.count ?? 0) // проверка на undefined || null, а если поставить || вместо ?? то при count = 0 будет false
+        setMinValue(parsed.minValue ?? 0)
+        setMaxValue(parsed.maxValue ?? 5)
+
+        validateCount(parsed.minValue ?? 0, parsed.maxValue ?? 0)
+      }
+    }
+  }, []);
+  useEffect(() => {
+    const data = {
+      count,
+      minValue,
+      maxValue,
+    }
+    localStorage.setItem('simpleCounter', JSON.stringify(data))
+  }, [count, minValue, maxValue])
 
   return (
     <div className={s.simpleCounterContainer}>
