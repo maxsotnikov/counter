@@ -1,4 +1,4 @@
-import s from '../SimpleCounter.module.css';
+import s from '../SimpleCounter.module.scss';
 import {Display, type DisplayModePropsType} from '../../Display/Display.tsx';
 import {ButtonsContainer} from '../../ButtonsContainer/ButtonsContainer.tsx';
 import type {ButtonPropsType} from '../../Button/Button.tsx';

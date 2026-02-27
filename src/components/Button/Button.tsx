@@ -1,4 +1,4 @@
-import './Button.css'
+import style from './Button.module.scss'
 
 export type ButtonPropsType = {
   title: string,
@@ -11,7 +11,7 @@ export const Button = ({title, onClick, disabled}: ButtonPropsType) => {
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`button ${disabled ? 'button:disabled' : ''}`}
+      className={`${style.button} ${disabled ? style.disabled : ''}`}
     >
       {title}
     </button>

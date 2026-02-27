@@ -1,0 +1,6 @@
+@use '../../styles/mixins' as *;
+
+.display {
+  @include borderElement;
+  text-align: center;
+}

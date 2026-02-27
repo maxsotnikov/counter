@@ -1,13 +1,11 @@
-import s from './SimpleCounter.module.css'
+import style from './SimpleCounter.module.scss'
 import {SetCounter} from './SetCounter/SetCounter.tsx';
 import {Counter} from './Counter/Counter.tsx';
 import {useEffect, useState} from 'react';
 import type {DisplayModePropsType} from '../Display/Display.tsx';
+import {MAX_INITIAL_VALUE, MIN_INITIAL_VALUE} from '../../model/data.ts';
 
-export const SimpleCounter2 = () => {
-
-  const MIN_INITIAL_VALUE = 0;
-  const MAX_INITIAL_VALUE = 5;
+export const SimpleCounterRedux = () => {
 
   const getData = (value: 'minValue' | 'maxValue', initialResult: number) => {
     const savedData = localStorage.getItem('simpleCounter');
@@ -94,7 +92,7 @@ export const SimpleCounter2 = () => {
   }, [count, minValue, maxValue])
 
   return (
-    <div className={s.simpleCounterContainer}>
+    <div className={style.simpleCounterContainer}>
       <SetCounter
         minValue={minValue}
         maxValue={maxValue}

@@ -1,18 +1,27 @@
-import {useEffect, useState} from 'react';
-import s from './UniversalCounter.module.css'
-import {
-  Display,
-  type DisplayModePropsType,
-} from '../Display/Display.tsx';
+import {useState} from 'react';
+import style from './UniversalCounter.module.scss'
+import {Display,} from '../Display/Display.tsx';
 import {ButtonsContainer} from '../ButtonsContainer/ButtonsContainer.tsx';
 import type {ButtonPropsType} from '../Button/Button.tsx';
+import {
+  IncrementAC,
+  ResetAC,
+  SetMaxAC,
+  SetMinAC,
+  SetModeAC
+} from '../../model/counter-reducer.ts';
+import {useAppSelector} from '../../common/hooks/useCounterSelector.ts';
+import {useAppDispatch} from '../../common/hooks/useCounterDispatch.ts';
+import {selectCounter} from '../../model/counter-selectors.ts';
+import {SettingMode} from '../Display/ui/SettingMode.tsx';
+
 
 export const UniversalCounter = () => {
+  const state = useAppSelector(selectCounter)
+  const {minValue, maxValue, count, displayMode} = state
 
-  const [minValue, setMinValue] = useState<number>(0)
-  const [maxValue, setMaxValue] = useState<number>(5)
-  const [count, setCount] = useState<number>(minValue)
-  const [displayMode, setDisplayMode] = useState<DisplayModePropsType>('counter')
+  const dispatch = useAppDispatch();
+
   const [minError, setMinError] = useState(false)
   const [maxError, setMaxError] = useState(false)
 
@@ -21,30 +30,22 @@ export const UniversalCounter = () => {
     setMaxError(max < 0 || max <= min)
   }
   const addCount = () => {
-    const newCount = count + 1
-    setCount(newCount)
+    dispatch(IncrementAC())
   }
   const resetCount = () => {
-    setCount(minValue)
+    dispatch(ResetAC())
   }
   const settingCount = () => {
-    if (displayMode === 'counter') {
-      setDisplayMode('settings')
-    } else {
-      setCount(minValue)
-      setDisplayMode('counter')
-    }
+    dispatch(SetModeAC({
+      displayMode: displayMode === 'counter' ? 'settings' : 'counter'
+    }))
   }
   const saveMaxCount = (newMaxValue: number) => {
-    if (minValue !== maxValue || newMaxValue > minValue) {
-      setMaxValue(newMaxValue)
-    }
+    dispatch(SetMaxAC({maxValue: newMaxValue}))
     validateCount(minValue, newMaxValue)
   }
   const saveMinCount = (newMinValue: number) => {
-    if (minValue !== maxValue || newMinValue < maxValue) {
-      setMinValue(newMinValue)
-    }
+    dispatch(SetMinAC({minValue: newMinValue}))
     validateCount(newMinValue, maxValue)
   }
 
@@ -74,40 +75,32 @@ export const UniversalCounter = () => {
     }
   ]
 
-  useEffect(() => {
-    const savedData = localStorage.getItem('universalCounter');
-    if (savedData) {
-      const parsed = JSON.parse(savedData)
-      if (parsed) {
-        setCount(parsed.count ?? 0) // проверка на undefined || null, а если поставить || вместо ?? то при count = 0 будет false
-        setMinValue(parsed.minValue ?? 0)
-        setMaxValue(parsed.maxValue ?? 5)
-
-        validateCount(parsed.minValue ?? 0, parsed.maxValue ?? 0) //убрать валидацию
-      }
-    }
-  }, []);
-  useEffect(() => {
-    const data = {
-      count,
-      minValue,
-      maxValue,
-    }
-    localStorage.setItem('universalCounter', JSON.stringify(data))
-  }, [count, minValue, maxValue])
-
   return (
-    <div className={s.universalCounterContainer}>
-      <Display
-        count={count}
-        maxValue={maxValue}
-        minValue={minValue}
-        maxError={maxError}
-        minError={minError}
-        mode={displayMode}
-        onMaxChange={saveMaxCount}
-        onMinChange={saveMinCount}
-      ></Display>
+    <div className={style.universalCounterContainer}>
+      <Display>
+        {/*{displayMode === 'error' && (
+          <span className={style.errorText}>incorrect value</span>
+        )}
+
+        {displayMode === 'message' && (
+          <span className={style.messageText}>enter values and press 'set'</span>
+        )}*/}
+
+        {displayMode === 'counter' && (
+          <span className={`${count === maxValue ? style.maxCount : ''}`}>{count}</span>
+        )}
+
+        {displayMode === 'settings' && (
+          <SettingMode
+            minValue={minValue}
+            maxValue={maxValue}
+            saveMaxCount={saveMaxCount}
+            saveMinCount={saveMinCount}
+            minError={minError}
+            maxError={maxError}
+          />
+        )}
+      </Display>
       <ButtonsContainer buttons={displayMode === 'counter' ? counterButtons : settingsButtons} />
     </div>
   );

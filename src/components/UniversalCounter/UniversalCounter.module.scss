@@ -1,0 +1,47 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.universalCounterContainer {
+  @include border;
+  font-size: 5rem;
+}
+
+.errorText {
+  font-size: 30px;
+  text-align: center;
+  color: $error-color;
+}
+
+.settings {
+  @include flexWrapper(column);
+  gap: $indent;
+  font-size: 2rem;
+
+  label {
+    @include flexWrapper(raw, null, space-between);
+    gap: $indent;
+  }
+
+  input {
+    background-color: #faf8f8;
+    border: 3px solid $primary-color;
+    border-radius: $border-radius;
+    color: $secondary-color;
+    font-weight: inherit;
+    font-size: 1rem;
+    text-align: center;
+
+    &.error {
+      background-color: $error-color;
+    }
+  }
+}
+
+.messageText {
+  font-size: 30px;
+  text-align: center;
+}
+
+.maxCount {
+  color: $error-color;
+}

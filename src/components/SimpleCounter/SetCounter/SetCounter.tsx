@@ -1,7 +1,7 @@
 import {Display, type DisplayModePropsType} from '../../Display/Display.tsx';
-import '../../Button/Button.css'
+import '../../Button/Button.module.scss'
 import {type ButtonPropsType} from '../../Button/Button.tsx';
-import s from '../SimpleCounter.module.css';
+import s from '../SimpleCounter.module.scss';
 import {ButtonsContainer} from '../../ButtonsContainer/ButtonsContainer.tsx';
 
 type SetCounter = {

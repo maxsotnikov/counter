@@ -1,0 +1,11 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+#root {
+  padding: $indent;
+}
+
+.container {
+  @include flexWrapper(column, center);
+  gap: 10vw;
+}

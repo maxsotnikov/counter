@@ -1,0 +1,24 @@
+@use './variables' as *;
+
+@mixin border {
+  padding: $indent;
+  @include flexWrapper(column);
+  gap: $indent;
+  border: 3px solid $primary-color;
+  border-radius: $border-radius;
+}
+
+@mixin borderElement {
+  padding: $indent;
+  gap: $indent;
+  border: inherit;
+  border-radius: inherit;
+}
+
+@mixin flexWrapper($direction: null, $align-items: null, $justify-content: null, $flex-wrap: null) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align-items;
+  justify-content: $justify-content;
+  flex-wrap: $flex-wrap;
+}

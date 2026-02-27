@@ -1,0 +1,7 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.buttons-container {
+  @include flexWrapper(raw, null, center);
+  @include borderElement;
+}

@@ -1,5 +1,5 @@
 import {Button, type ButtonPropsType} from '../Button/Button.tsx';
-import '../Button/Button.css'
+import style from './ButtonsContainer.module.scss'
 
 type ButtonsContainerPropsType = {
   buttons: ButtonPropsType[]
@@ -7,7 +7,7 @@ type ButtonsContainerPropsType = {
 
 export const ButtonsContainer = ({buttons}: ButtonsContainerPropsType) => {
   return (
-    <div className={'buttons-container'}>
+    <div className={style.buttonsContainer}>
       {buttons.map((button, index) => (
         <Button
           key={index}

@@ -1,6 +1,11 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
 .simpleCounterContainer {
-  display: flex;
-  gap: 100px;
+//  display: flex;
+//  gap: 100px;
+  @include border
+
 }
 
 .counterContainer {
@@ -14,4 +19,10 @@
   color: #282837;
   font-weight: bold;
   font-size: 30px;
+}
+
+.errorText {
+  font-size: 30px;
+  text-align: center;
+  color: red;
 }
