@@ -1,48 +1,40 @@
-import s from '../SimpleCounter.module.scss';
-import {Display, type DisplayModePropsType} from '../../Display/Display.tsx';
+import style from './Counter.module.scss';
+import {Display} from '../../Display/Display.tsx';
 import {ButtonsContainer} from '../../ButtonsContainer/ButtonsContainer.tsx';
-import type {ButtonPropsType} from '../../Button/Button.tsx';
-
-type Counter = {
-  minValue: number
-  maxValue: number
-  count: number
-  addCount: () => void,
-  resetCount: () => void,
-  mode: DisplayModePropsType
-}
+import styleDisplay from '../../Display/Display.module.scss';
+import type {CounterType} from '../../../common/types.ts';
 
 export const Counter = ({
                           minValue,
                           maxValue,
                           count,
-                          addCount,
-                          resetCount,
-                          mode,
-                        }: Counter) => {
-
-  const counterButtons: ButtonPropsType[] = [
-    {
-      title: 'inc',
-      onClick: addCount,
-      disabled: count >= maxValue || mode === 'message' || mode === 'error',
-    },
-    {
-      title: 'reset',
-      onClick: resetCount,
-      disabled: count === minValue || mode === 'message' || mode === 'error',
-    },
-  ]
-
+                          onAdd,
+                          onReset,
+                          displayMode,
+                        }: CounterType) => {
   return (
-    <div className={s.counterContainer}>
-      <Display
+    <div className={style.counterContainer}>
+      <Display>
+        {displayMode === 'error' && (
+          <span className={styleDisplay.errorText}>incorrect value</span>
+        )}
+
+        {displayMode === 'message' && (
+          <span className={styleDisplay.messageText}>enter values and press 'set'</span>
+        )}
+
+        {displayMode === 'counter' && (
+          <span className={`${count === maxValue ? styleDisplay.maxCount : ''}`}>{count}</span>
+        )}
+      </Display>
+      <ButtonsContainer
+        mode={'simpleCounter'}
         count={count}
-        maxValue={maxValue}
         minValue={minValue}
-        mode={mode}
+        maxValue={maxValue}
+        onAdd={onAdd}
+        onReset={onReset}
       />
-      <ButtonsContainer buttons={counterButtons} />
     </div>
   );
 };

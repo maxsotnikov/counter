@@ -6,12 +6,6 @@
   font-size: 5rem;
 }
 
-.errorText {
-  font-size: 30px;
-  text-align: center;
-  color: $error-color;
-}
-
 .settings {
   @include flexWrapper(column);
   gap: $indent;
@@ -35,13 +29,4 @@
       background-color: $error-color;
     }
   }
-}
-
-.messageText {
-  font-size: 30px;
-  text-align: center;
-}
-
-.maxCount {
-  color: $error-color;
 }

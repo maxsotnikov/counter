@@ -1,9 +1,13 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
-import {counterReducer} from '../model/counter-reducer.ts';
+import {universalCounterReducer} from '../model/universalCounter-reducer.ts';
+import {settingsReducer} from '../model/settings-reducer.ts';
+import {simpleCounterReducer} from '../model/simpleCounter-reducer.ts';
 
 // объединение reducer'ов с помощью combineReducers
 const rootReducer = combineReducers({
-  counter: counterReducer,
+  universalCounter: universalCounterReducer,
+  simpleCounter: simpleCounterReducer,
+  settings: settingsReducer
 })
 
 // создание store
@@ -15,7 +19,3 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>
 // автоматическое определение типа метода dispatch
 export type AppDispatch = typeof store.dispatch
-
-// для возможности обращения к store в консоли браузера
-// @ts-ignore
-window.store = store

@@ -1,32 +1,33 @@
-import type {CounterType} from './counter-reducer.ts';
+import type {
+  SettingType,
+  SimpleCounterType,
+  UniversalCounterType
+} from '../common/types.ts';
 
 //-----------------values---------------------
 export const MIN_INITIAL_VALUE = 0;
 export const MAX_INITIAL_VALUE = 5;
 
-
-export const initialState: CounterType = {
+export const universalCounterInitialState: UniversalCounterType = {
+  displayMode: 'counter',
+  buttonsMode: 'universalCounter',
+  count: MIN_INITIAL_VALUE,
   minValue: MIN_INITIAL_VALUE,
   maxValue: MAX_INITIAL_VALUE,
-  count: MIN_INITIAL_VALUE,
-  displayMode: 'counter'
+  minError: false,
+  maxError: false,
 }
 
-// const counterButtons: ButtonPropsType[] = [
-//   {
-//     title: 'inc',
-//     onClick: addCount,
-//     disabled: initialState.count >= initialState.maxValue,
-//   },
-//   {
-//     title: 'reset',
-//     onClick: resetCount,
-//     disabled: initialState.count === initialState.minValue,
-//   },
-//   {
-//     title: 'set',
-//     onClick: settingCount,
-//     disabled: false,
-//   }
-// ]
+export const simpleCounterInitialState: SimpleCounterType = {
+  // displayMode: 'counter',
+  // buttonsMode: 'universalCounter',
+  count: MIN_INITIAL_VALUE,
+  minValue: MIN_INITIAL_VALUE,
+  maxValue: MAX_INITIAL_VALUE,
+  minError: false,
+  maxError: false,
+}
 
+export const settingsInitialState: SettingType = {
+  isSetDisabled: false,
+}

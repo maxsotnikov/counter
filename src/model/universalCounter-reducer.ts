@@ -1,23 +1,17 @@
-import type {DisplayModePropsType} from '../components/Display/Display.tsx';
-import {initialState} from './data.ts';
+import {universalCounterInitialState} from './data.ts';
 import {createAction, createReducer} from '@reduxjs/toolkit';
+import type {ButtonsModeType, DisplayModePropsType} from '../common/types.ts';
 
-export type CounterType = {
-  minValue: number;
-  maxValue: number;
-  count: number;
-  displayMode: DisplayModePropsType
-}
-
-export const IncrementAC = createAction('counter/increment');
-export const ResetAC = createAction('counter/reset');
+export const IncrementAC = createAction('universalCounter/increment');
+export const ResetAC = createAction('universalCounter/reset');
 export const SetModeAC = createAction<{
-  displayMode: DisplayModePropsType
-}>('counter/setMode');
-export const SetMinAC = createAction<{ minValue: number }>('counter/setMin');
-export const SetMaxAC = createAction<{ maxValue: number }>('counter/setMax');
+  displayMode: DisplayModePropsType,
+  buttonsMode: ButtonsModeType,
+}>('universalCounter/setMode');
+export const SetMinAC = createAction<{ minValue: number }>('universalCounter/setMin');
+export const SetMaxAC = createAction<{ maxValue: number }>('universalCounter/setMax');
 
-export const counterReducer = createReducer(initialState, (builder) => {
+export const universalCounterReducer = createReducer(universalCounterInitialState, (builder) => {
   builder
     .addCase(IncrementAC, state => {
       state.count += 1;
@@ -27,16 +21,23 @@ export const counterReducer = createReducer(initialState, (builder) => {
     })
     .addCase(SetModeAC, (state, action) => {
       state.displayMode = action.payload.displayMode;
+      state.buttonsMode = action.payload.buttonsMode;
     })
     .addCase(SetMinAC, (state, action) => {
       state.minValue = action.payload.minValue;
       state.count = action.payload.minValue // т.к. здесь Immer, то он делает черновик - state, если напишу = state.minValue, то count получает новое значение и создается новый immutable state
+      state.minError = state.minValue < 0 || state.minValue >= state.maxValue
+      state.maxError = state.maxValue < 0 || state.maxValue <= state.minValue
     })
     .addCase(SetMaxAC, (state, action) => {
       state.maxValue = action.payload.maxValue;
+      state.minError = state.minValue < 0 || state.minValue >= state.maxValue
+      state.maxError = state.maxValue < 0 || state.maxValue <= state.minValue
+
     })
 })
 
+//обычный reducer
 /*export const IncrementAC2 = () => {
   return {type: 'INCREMENT'} as const
 }
@@ -47,8 +48,8 @@ export const ResetAC2 = () => {
 }
 
 
-export const SetModeAC2 = (mode: DisplayModePropsType) => {
-  return {type: 'SET_MODE', payload: mode} as const
+export const SetModeAC2 = (displayMode: DisplayModePropsType) => {
+  return {type: 'SET_MODE', payload: displayMode} as const
 }
 
 
@@ -74,7 +75,7 @@ type Actions =
   | SetMinAction
   | SetMaxAction
 
-export const counterReducer2 = (state: CounterType = initialState, action: Actions): CounterType => {
+export const counterReducer2 = (state: UniversalCounterType = universalCounterInitialState, action: Actions): UniversalCounterType => {
   switch (action.type) {
     case 'increment': {
       return {...state, count: state.count + 1}
@@ -94,6 +95,4 @@ export const counterReducer2 = (state: CounterType = initialState, action: Actio
     default:
       return state
   }
-}*/ //обычный reducer
-
-
+}*/

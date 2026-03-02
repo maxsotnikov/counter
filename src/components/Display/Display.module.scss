@@ -1,6 +1,22 @@
 @use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
 
 .display {
   @include borderElement;
   text-align: center;
+}
+
+.errorText {
+  font-size: 30px;
+  text-align: center;
+  color: $error-color;
+}
+
+.messageText {
+  font-size: 30px;
+  text-align: center;
+}
+
+.maxCount {
+  color: $error-color;
 }
