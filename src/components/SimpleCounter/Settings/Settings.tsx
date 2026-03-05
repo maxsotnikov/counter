@@ -7,37 +7,25 @@ import type {SetCounter} from '../../../common/types.ts';
 
 
 export const Settings = ({
-                                 minValue,
-                                 maxValue,
-                                 settingCount,
-                                 // count,
-                                 // displayMode,
-                                 maxError,
-                                 minError,
-                                 saveMaxCount,
-                                 saveMinCount,
-
-                               }: SetCounter) => {
-
-  // const settingsButtons: ButtonPropsType[] = [
-  //   {
-  //     title: 'set',
-  //     onClick: settingCount,
-  //     disabled: isSetDisabled || minValue >= maxValue || minValue < 0 || maxValue < 0,
-  //   }
-  // ]
-
+                           minValue,
+                           maxValue,
+                           settingCount,
+                           maxError,
+                           minError,
+                           saveMaxCount,
+                           saveMinCount,
+                         }: SetCounter) => {
   return (
     <div className={style.settingsContainer}>
       <Display>
-          <SettingMode
-            minValue={minValue}
-            maxValue={maxValue}
-            saveMaxCount={saveMaxCount}
-            saveMinCount={saveMinCount}
-            minError={minError}
-            maxError={maxError}
-          />
+        <SettingMode
+          minValue={minValue}
+          maxValue={maxValue}
+          saveMaxCount={saveMaxCount}
+          saveMinCount={saveMinCount}
+          minError={minError}
+          maxError={maxError}
+        />
       </Display>
       <ButtonsContainer
         mode={'settings'}

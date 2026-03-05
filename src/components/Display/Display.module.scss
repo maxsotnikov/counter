@@ -3,18 +3,19 @@
 
 .display {
   @include borderElement;
-  text-align: center;
+  @include flexWrapper(raw, center, center);
+  height: 100%;
+  font-size: 5rem;
+
 }
 
 .errorText {
   font-size: 30px;
-  text-align: center;
   color: $error-color;
 }
 
 .messageText {
   font-size: 30px;
-  text-align: center;
 }
 
 .maxCount {

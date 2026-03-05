@@ -1,8 +1,8 @@
-import {createAction, createReducer} from '@reduxjs/toolkit';
-import {SetMaxAC, SetMinAC} from './simpleCounter-reducer.ts';
+import {createReducer} from '@reduxjs/toolkit';
 import {settingsInitialState} from './data.ts';
+import {ApplySettingsAC, SetMaxAC, SetMinAC} from './actions.ts';
 
-export const ApplySettingsAC = createAction('settings/apply')
+// export const ApplySettingsAC = createAction('settings/apply')
 
 export const settingsReducer = createReducer(settingsInitialState, (builder) => {
   builder
@@ -13,6 +13,7 @@ export const settingsReducer = createReducer(settingsInitialState, (builder) => 
       state.isSetDisabled = false
     })
     .addCase(ApplySettingsAC, state => {
+
       state.isSetDisabled = true
     })
 })

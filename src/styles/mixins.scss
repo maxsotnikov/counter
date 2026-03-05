@@ -2,7 +2,7 @@
 
 @mixin border {
   padding: $indent;
-  @include flexWrapper(column);
+  @include flexWrapper(column, null, space-between);
   gap: $indent;
   border: 3px solid $primary-color;
   border-radius: $border-radius;
