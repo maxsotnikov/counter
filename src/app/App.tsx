@@ -1,6 +1,6 @@
 import './App.scss'
-import {UniversalCounter} from '../components/UniversalCounter/UniversalCounter.tsx';
-import {SimpleCounter} from '../components/SimpleCounter/SimpleCounter.tsx';
+import {UniversalCounter} from '@/components/UniversalCounter/UniversalCounter.tsx';
+import {SimpleCounter} from '@/components/SimpleCounter/SimpleCounter.tsx';
 
 function App() {
   return (

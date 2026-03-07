@@ -1,7 +1,10 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
-import {universalCounterReducer} from '../model/universalCounter-reducer.ts';
-import {settingsReducer} from '../model/settings-reducer.ts';
-import {simpleCounterReducer} from '../model/simpleCounter-reducer.ts';
+
+import {settingsReducer} from '@/model/reducers/settings-reducer.ts';
+import {simpleCounterReducer} from '@/model/reducers/simpleCounter-reducer.ts';
+import {
+  universalCounterReducer
+} from '@/model/reducers/universalCounter-reducer.ts';
 
 // объединение reducer'ов с помощью combineReducers
 const rootReducer = combineReducers({

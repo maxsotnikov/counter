@@ -1,17 +1,17 @@
 import style from './SimpleCounter.module.scss'
 import {Settings} from './Settings/Settings.tsx';
 import {Counter} from './Counter/Counter.tsx';
-import type {DisplayModePropsType} from '../../common/types.ts';
-import {useAppSelector} from '../../common/hooks/useCounterSelector.ts';
-import {useAppDispatch} from '../../common/hooks/useCounterDispatch.ts';
-import {selectSettings} from '../../model/settings-selector.ts';
-import {selectSimpleCounter} from '../../model/simpleCounter-selectors.ts';
+import type {DisplayModePropsType} from '@/common/types.ts';
+import {useAppSelector} from '@/common/hooks/useCounterSelector.ts';
+import {useAppDispatch} from '@/common/hooks/useCounterDispatch.ts';
+import {selectSettings} from '@/model/selectors/settings-selector.ts';
+import {selectSimpleCounter} from '@/model/selectors/simpleCounter-selectors.ts';
 import {
   ApplySettingsAC,
   IncrementAC,
   ResetAC,
   SetMaxAC, SetMinAC
-} from '../../model/actions.ts';
+} from '@/model/actions.ts';
 
 export const SimpleCounter = () => {
   const state = useAppSelector(selectSimpleCounter)

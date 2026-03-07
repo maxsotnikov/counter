@@ -1,6 +1,6 @@
 import {Button, type ButtonPropsType} from '../Button/Button.tsx';
 import style from './ButtonsContainer.module.scss'
-import type {ButtonsContainerType} from '../../common/types.ts';
+import type {ButtonsContainerType} from '@/common/types.ts';
 
 export const ButtonsContainer = (props: ButtonsContainerType) => {
   let buttons: ButtonPropsType[] = []

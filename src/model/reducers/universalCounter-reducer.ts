@@ -1,6 +1,6 @@
-import {universalCounterInitialState} from './data.ts';
+import {universalCounterInitialState} from '@/model/data.ts';
 import {createAction, createReducer} from '@reduxjs/toolkit';
-import type {ButtonsModeType, DisplayModePropsType} from '../common/types.ts';
+import type {ButtonsModeType, DisplayModePropsType} from '@/common/types.ts';
 
 export const IncrementAC = createAction('universalCounter/increment');
 export const ResetAC = createAction('universalCounter/reset');

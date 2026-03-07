@@ -2,7 +2,7 @@ import style from './Counter.module.scss';
 import {Display} from '../../Display/Display.tsx';
 import {ButtonsContainer} from '../../ButtonsContainer/ButtonsContainer.tsx';
 import styleDisplay from '../../Display/Display.module.scss';
-import type {CounterType} from '../../../common/types.ts';
+import type {CounterType} from '@/common/types.ts';
 
 export const Counter = ({
                           minValue,

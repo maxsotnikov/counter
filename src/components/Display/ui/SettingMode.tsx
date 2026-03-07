@@ -1,4 +1,4 @@
-import style from '../../UniversalCounter/UniversalCounter.module.scss';
+import style from '@/components/UniversalCounter/UniversalCounter.module.scss';
 
 type SettingModeProps = {
   minValue: number;

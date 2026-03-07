@@ -12,14 +12,11 @@ export type UniversalCounterType = {
 }
 
 export type SimpleCounterType = {
-  // displayMode: DisplayModePropsType
   count: number
   minValue: number
   maxValue: number
   minError: boolean
   maxError: boolean
-  // onAdd: () => void,
-  // onReset: () => void,
 }
 
 //----------------------------buttonsType---------------------------------------
@@ -53,7 +50,7 @@ export type SettingsButtonsModeType = {
   onSet: () => void
 }
 
-//----------------------------------------
+//-----------------------------counterElementsTypes-----------------------------
 export type SetCounter = {
   minValue: number
   maxValue: number
@@ -62,7 +59,6 @@ export type SetCounter = {
   minError: boolean
   saveMinCount: (value: number) => void
   saveMaxCount: (value: number) => void
-  // isSetDisabled: boolean
 }
 
 export type CounterType = {

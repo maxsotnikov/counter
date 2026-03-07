@@ -8,10 +8,10 @@ import {
   SetMaxAC,
   SetMinAC,
   SetModeAC
-} from '../../model/universalCounter-reducer.ts';
-import {useAppSelector} from '../../common/hooks/useCounterSelector.ts';
-import {useAppDispatch} from '../../common/hooks/useCounterDispatch.ts';
-import {selectUniversalCounter} from '../../model/universalCounter-selectors.ts';
+} from '@/model/reducers/universalCounter-reducer.ts';
+import {useAppSelector} from '@/common/hooks/useCounterSelector.ts';
+import {useAppDispatch} from '@/common/hooks/useCounterDispatch.ts';
+import {selectUniversalCounter} from '@/model/selectors/universalCounter-selectors.ts';
 import {SettingMode} from '../Display/ui/SettingMode.tsx';
 
 export const UniversalCounter = () => {

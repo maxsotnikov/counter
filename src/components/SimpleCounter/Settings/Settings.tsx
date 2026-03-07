@@ -3,7 +3,7 @@ import '../../Button/Button.module.scss'
 import style from './Settings.module.scss';
 import {ButtonsContainer} from '../../ButtonsContainer/ButtonsContainer.tsx';
 import {SettingMode} from '../../Display/ui/SettingMode.tsx';
-import type {SetCounter} from '../../../common/types.ts';
+import type {SetCounter} from '@/common/types.ts';
 
 
 export const Settings = ({

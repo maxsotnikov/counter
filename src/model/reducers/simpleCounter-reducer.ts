@@ -1,4 +1,4 @@
-import {simpleCounterInitialState} from './data.ts';
+import {simpleCounterInitialState} from '@/model/data.ts';
 import {createReducer} from '@reduxjs/toolkit';
 import {
   ApplySettingsAC,
@@ -6,7 +6,7 @@ import {
   ResetAC,
   SetMaxAC,
   SetMinAC
-} from './actions.ts';
+} from '@/model/actions.ts';
 
 // export const IncrementAC = createAction('simpleCounter/increment');
 // export const ResetAC = createAction('simpleCounter/reset');
